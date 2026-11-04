@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<span th:replace="fragment-head :: common-head(title='Error')"></span>
+<body>
+<header th:replace="fragment-nav :: nav"></header>
+<main class="app-content">
+  <div class="page-header"><h1>Something went wrong!</h1><p>Stand by! Our engineers are on it.</p></div>
+  <section class="panel"><div th:replace="error-message :: error-message-list"></div></section>
+</main>
+</body></html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<span th:replace="fragment-head :: common-head(title='Widgets')"></span>
+<body>
+<header th:replace="fragment-nav :: nav"></header>
+<main class="app-content">
+  <div class="page-header">
+    <h1 id="title">Widgets</h1>
+    <p>Manage widget definitions.</p>
+    <div class="actions">
+      <a class="btn btn-primary" th:href="@{/web/widget}" id="add-widget">Add Widget</a>
+    </div>
+  </div>
+  <div th:replace="error-message :: error-message-single"></div>
+  <section class="panel">
+    <div class="table-wrap">
+      <table class="data-table" id="widget">
+        <thead><tr><th>Name</th><th>Description</th><th class="action-cell">Update</th><th class="action-cell">Delete</th></tr></thead>
+        <tbody>
+          <tr th:each="widget : ${widgets}">
+            <td th:id="'name-' + ${widget.id}" th:text="${widget.name}"></td>
+            <td th:id="'description-' + ${widget.id}" th:text="${widget.description}"></td>
+            <td class="action-cell"><a class="btn" th:href="@{/web/widget/{id}(id=${widget.id})}" th:id="'update-' + ${widget.id}" aria-label="Update widget">Update</a></td>
+            <td class="action-cell"><a class="btn btn-danger confirmation-alert" th:id="'delete-' + ${widget.id}" th:href="@{/web/widget/delete/{id}(id=${widget.id})}" aria-label="Delete widget">Delete</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<span th:replace="fragment-javascript :: common-datatables"></span>
+<script>
+$(document).ready(function() {
+  $('#widget').DataTable({stateSave:true,pageLength:25});
+});
+</script>
+</body></html>
